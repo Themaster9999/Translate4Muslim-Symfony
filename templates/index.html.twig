@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Translate4Muslim | Homepage{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('/build/app.css') }}" />
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        {# header #}
+        {% block header %}
+            <header>
+                <div id="header_div_1" class="header_div_1">
+                    <h1 id="header_div_h1" class="header_div_h1">Translate4Muslim</h1>
+                </div>
+                <hr style="width: 90%;margin:auto;">
+                <div id="header_div_2" class="header_div_2">
+                    <ul div="header_div_2_ul" class="header_div_2_ul">
+                        <li><a id='home' href="/index">Home</a></li>
+                        <li><a id='sign-in' href="#sign-in_or_sign_up"> {{ app.user ? 'Logout' : 'Sign-in/up' }} </a></li>
+                        <li><a id='About' href="/about">About</a></li>
+                        <li><a id='Contact' href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+            </header>
+        {% endblock %}
+        {# body #}
+        {% block body %}
+            <div id='sign-in_area_div' class='sign-in_area'>
+                <div id='sign_in_div_id'>
+                    <form action='profile.php' method='post' id='sign_in_form_id' class='sign-in_form'>
+                        <input id='sign-in_username' name='username_exist' type='text' placeholder='Username'/>
+                        <input id='sign-in_password' name='pwd_exist' type='password' placeholder='Password'/>
+                        <div style='height:40px;display:block;margin:auto;'><input id='sign-in_stay_signed_in' name='stay_signed_in' type='checkbox'/><h4 class='stay_signed_in_h4'>Keep Me IN !!</h4><br></div>
+                        <input id='sign-in_submit' name='sign_in' type='submit' value='Sign-in'/>
+                    </form>
+                    <span id='new_user_span' class='new_user_span_class'>New User</span>
+                </div>
+                
+                <div id='sign_up_div_id'>
+                    <form action='create_account.php' method='post' id='sign_up_form_id' class='sign-up_form'>
+                        <input id='sign-up_username' name='username_new' type='text' placeholder='Username'/>
+                        <input id='sign-up_email' name='email_new' type='text' placeholder='Email'/>
+                        <input id='sign-up_retype_email' name='email_new_retype' type='text' placeholder='Retype email'/>
+                        <input id='sign-up_password' name='pwd_new' type='password' placeholder='Password'/>
+                        <input id='sign-up_submit' name='sign_up' type='submit' value='Sign-up'/>
+                    </form>
+                    <span id='current_user_span' class='current_user_span_class'>Current User</span>
+                </div>
+            </div>
+        {% endblock %}
+        {# footer #}
+        {% block footer %}
+            <footer>
+                <p>&copy; 2023 Translate4Muslim created by Boustani Mohamed</p>
+            </footer>
+        {% endblock %}
+    </body>
+</html>

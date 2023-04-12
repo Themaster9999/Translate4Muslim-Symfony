@@ -145,7 +145,7 @@
       line-height: 40px;
   }
   
-  input#sign-in_submit{
+  #sign-in_submit{
       display: block;
       margin: auto;
       width: 100px;
@@ -157,7 +157,7 @@
       margin-top: 10px;
   }
   
-  input#sign-in_submit:hover {
+  #sign-in_submit:hover {
     background-color: #111;
     cursor: pointer;
   }

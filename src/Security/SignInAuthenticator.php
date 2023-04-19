@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,26 +21,55 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 class SignInAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
+    private $token;
 
-    public const LOGIN_ROUTE = 'index_login';
+    public const LOGIN_ROUTE = 'index';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private SignUpHandler $suh)
     {
+    }
+
+    public function check(Request $request): ?array
+    {
+        $this->token = $request->request->get('_csrf_token');
+
+        if($data = $request->request->all('sign_in'))
+        {
+            $request->getSession()->set(Security::LAST_USERNAME, $data['email']);
+
+            return $data;
+        }
+        else if($data = $request->request->all('sign_up'))
+        {
+            $data = $request->request->all('sign_up');
+            $this->suh->push($data);
+
+            return $data;
+        }     
+
+        return null;
     }
 
     public function authenticate(Request $request): Passport
     {
-        $email = $request->request->get('username_exist', '');
-
-        $request->getSession()->set(Security::LAST_USERNAME, $email);
-
-        return new Passport(
-            new UserBadge($email),
-            new PasswordCredentials($request->request->get('pwd_exist', '')),
-            [
-                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
-            ]
-        );
+        if($data = $this->check($request))
+        {   
+            return new Passport(
+                new UserBadge($data['email']),
+                new PasswordCredentials($data['password']),               
+                [
+                    new CsrfTokenBadge('authenticate', $this->token),
+                ]);
+        }
+        else
+        {
+            return new Passport(
+                new UserBadge(''),
+                new PasswordCredentials(''),               
+                [
+                    new CsrfTokenBadge('authenticate', ''),
+                ]);
+        }
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

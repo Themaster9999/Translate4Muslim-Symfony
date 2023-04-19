@@ -27,6 +27,8 @@ class Badge
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
+        $this->name = 'Salamu Alaikum Badge';
+        $this->tier = 'Gold';
     }
 
     public function getId(): ?int

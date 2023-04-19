@@ -1,4 +1,7 @@
-* {
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/app.css ***!
+  \**************************************************************************************************************/
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -68,7 +71,7 @@
   div ul li a:hover {
     text-decoration: underline;
   }
-
+  
   footer {
     background-color: #f8f8ff;
     padding: 1rem;
@@ -79,7 +82,7 @@
     display: block;
     bottom : 0;
   }
-
+  
   main {
     padding: 1rem;
     height: auto;
@@ -89,7 +92,7 @@
   
   .sign-in_area
   {
-    width: max-content;
+    width: 300px;
     height: 0;
     transition: height 1s ease;
     overflow: hidden;
@@ -99,53 +102,48 @@
     margin-top: 25px;
   }
   
-  #sign_in_div_id
+  .sign_in_div_id
   {
     display: block;
   }
   
-  #sign_up_div_id
+  .sign_up_div_id
   {
     display: none;
   }
   
-  .sign-in_form
+  .form
   {
     line-height: 90px;
     margin: 5px;
     display: block;
   }
   
-  input#sign-in_username {
-      display: block;
-      width: 100%;
-      height: 40px;
-      padding: 10px;
+  .input_field {
+    display: block;
+    width: 90%;
+    height: 40px;
+    padding: 10px;
+    margin: auto;
+    margin-top: 1.5em;
+    font-weight: bold;
+    border: 2px solid #333;
+  }
+
+  .check_box {
+    display: block;
+    width: 100%;
+    height: 20px;
+    margin: auto;
+    margin-top: 1.5em;
   }
   
-  input#sign-in_password {
-      display: block;
-      width: 100%;
-      height: 40px;
-      padding: 10px;
-      margin-top: 10px;
+  .input_field:hover {
+    background-color: #333;
+    color: white;
   }
   
-  input#sign-in_stay_signed_in {
-      width: 40%;
-      float: left;
-      margin-top: 12px;
-      height: 15px;
-  }
-  
-  h4.stay_signed_in_h4 {
-      width: 60%;
-      float: left;
-      height: 100%;
-      line-height: 40px;
-  }
-  
-  #sign-in_submit{
+  .form_submit{
       display: block;
       margin: auto;
       width: 100px;
@@ -154,81 +152,25 @@
       color: white;
       border-radius: 5px;
       border: none;
-      margin-top: 10px;
+      margin-top: 1.5em;
   }
   
-  #sign-in_submit:hover {
+  .form_submit:hover {
     background-color: #111;
     cursor: pointer;
   }
   
-  
-  
-  .new_user_span_class, .current_user_span_class
+  .form_span_class
   {
     color: blue;
     margin: auto;
     display: block;
     width: max-content;
     cursor: pointer;
+    margin-top: 1.5em;
   }
   
-  .new_user_span_class:hover, .current_user_span_class:hover
+  .form_span_class:hover
   {
     text-decoration: underline;
-  }
-  
-  form.sign-up_form {
-      line-height: 90px;
-      margin: 5px;
-    display: block;
-  }
-  
-  input#sign-up_username {
-      display: block;
-      width: 100%;
-      height: 40px;
-      padding: 10px;
-  }
-  
-  input#sign-up_email {
-      display: block;
-      width: 100%;
-      height: 40px;
-      padding: 10px;
-      margin-top: 10px;
-  }
-  
-  input#sign-up_retype_email {
-      display: block;
-      width: 100%;
-      height: 40px;
-      padding: 10px;
-      margin-top: 10px;
-  }
-  
-  input#sign-up_password {
-      display: block;
-      width: 100%;
-      height: 40px;
-      padding: 10px;
-      margin-top: 10px;
-  }
-  
-  input#sign-up_submit {
-      display: block;
-      margin: auto;
-      width: 100px;
-      background: #333;
-      height: 30px;
-      color: white;
-      border-radius: 5px;
-      border: none;
-      margin-top: 10px;
-  }
-  
-  input#sign-up_submit:hover
-  {
-    background-color: #111;
-    cursor: pointer;
   }

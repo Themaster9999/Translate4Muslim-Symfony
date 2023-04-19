@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -26,15 +28,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
-     */
+    */
+
+     #[ORM\Column]
+    private ?string $password = null;
+
+     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+     #[ORM\JoinColumn(nullable: false)]
+     private ?Profile $profile = null;
+
+     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+     private ?Verify $verify = null;
+
+     #[ORM\Column]
+     private ?bool $verified = null;
 
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
+        $this->verified = false;
     }
-
-    #[ORM\Column]
-    private ?string $password = null;
 
     public function getId(): ?int
     {
@@ -116,5 +129,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(Profile $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    public function getVerify(): ?Verify
+    {
+        return $this->verify;
+    }
+
+    public function setVerify(Verify $verify): self
+    {
+        // set the owning side of the relation if necessary
+        if ($verify->getUser() !== $this) {
+            $verify->setUser($this);
+        }
+
+        $this->verify = $verify;
+
+        return $this;
+    }
+
+    public function isVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
+
+        return $this;
     }
 }

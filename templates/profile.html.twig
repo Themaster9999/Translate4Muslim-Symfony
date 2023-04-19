@@ -1,0 +1,27 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Translate4Muslim | Profile{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/build/profile.css') }}" />
+{% endblock %}
+
+{% block main %}
+    <div>
+        <h1 style="text-align: center;">Profile:</h1>
+        <img class='profile_image' src='{{ app.user.profile.imagepath }}' alt='Image_Not_Found'>
+        <ul class='profile_details'>
+            {% if app.user.verified %}
+                <li style="font-size:bold;color:green;">🟢 Verified 🟢</li>
+            {% else %}
+                <li style="font-size:bold;color:red;">🔴 Verification Pending 🔴</li>
+            {% endif %}
+            <li>Username : {{ app.user.profile.username }}</li>
+            <li>Email :{{ app.user.profile.email }}</li>
+            <li>Bio : {{ app.user.profile.bio }}</li>
+            <li>Total Badges : {{ app.user.profile.badges|length }}</li>
+            <li>Total Requests : {{ app.user.profile.requests|length }}</li>
+            <li>Total Comments : {{ app.user.profile.comments|length }}</li>
+        </ul>
+    </div>
+{% endblock %}

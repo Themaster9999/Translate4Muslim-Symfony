@@ -6,7 +6,7 @@ var sign_in_div = null;
 var sign_in_form_div = null;
 var sign_up_form_div = null;
 var isExpanded = false;
-var tole = "210px";
+var tole = "260px";
 
 // Main Function
 window.onload = function () {
@@ -23,11 +23,11 @@ window.onload = function () {
    {
 	   	if (isExpanded) {
 			sign_in_div.style.height = "0";
-			sign_in_div.style.border = "0px solid grey";
+			sign_in_div.style.border = "none";
 			isExpanded = false;
 		} else {
 			sign_in_div.style.height = tole;
-			sign_in_div.style.border = "1px solid grey";
+			sign_in_div.style.border = "2px solid #333";
 			isExpanded = true;
 		}
    }
@@ -39,7 +39,7 @@ window.onload = function () {
    new_user.addEventListener('click', function() {
 		sign_in_form_div.style.display = "none";
 		sign_up_form_div.style.display = "block";
-		tole = "270px";
+		tole = "280px";
 		isExpanded = false;
 		divHeightChange();
    });
@@ -47,7 +47,7 @@ window.onload = function () {
    current_user.addEventListener('click', function() {
 		sign_up_form_div.style.display = "none";
 		sign_in_form_div.style.display = "block";
-		tole = "210px";
+		tole = "260px";
 		isExpanded = false;
 		divHeightChange();
    });
